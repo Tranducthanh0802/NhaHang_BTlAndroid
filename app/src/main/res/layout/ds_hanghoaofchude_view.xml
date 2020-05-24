@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:id="@+id/backdsHang"
+            />
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_toRightOf="@+id/backdsHang"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:hint="Tim kiem do an"
+            android:id="@+id/edtTimkiem"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/edtTimkiem">
+
+            <ImageView
+                android:id="@+id/imgShop_ofchude"
+                android:layout_width="30dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:src="@drawable/ic_shopping_cart_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/imgShop_ofchude"
+                android:layout_alignRight="@id/imgShop_ofchude"
+                android:text="1"
+                android:textSize="16sp"
+                android:paddingBottom="10dp"
+                android:background="#81FF33"
+                android:id="@+id/slshop_ofchude"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ttt"
+        android:text="Sap xep :"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ttt"
+            android:id="@+id/spinnerChonloc"
+            />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/reCyDs_hanghoaOfchude"
+        android:layout_height="match_parent"/>
+</LinearLayout>

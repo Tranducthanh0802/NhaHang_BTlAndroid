@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:paddingTop="10dp"
+       android:id="@+id/RecyslSp_giohang"
+
+        />
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_below="@id/RecyslSp_giohang"
+        android:layout_height="wrap_content"
+        android:id="@+id/relation_giohang"
+        android:layout_alignParentBottom="true"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="tam tinh:"
+            android:textSize="16sp"
+            android:layout_above="@+id/btnThanhtoan_giohang"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="16sp"
+            android:id="@+id/sotien_giohang"
+            android:layout_above="@+id/btnThanhtoan_giohang"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:text="Thanh Toan"
+            android:id="@+id/btnThanhtoan_giohang"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

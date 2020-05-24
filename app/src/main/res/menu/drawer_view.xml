@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+    <item android:id="@+id/lienHeCuocGoi"
+        android:title="Lien he den tong dai 18001900"
+        />
+       <item android:title="Mo Nhac"
+            android:id="@+id/amNhac"
+           />
+    </group>
+</menu>

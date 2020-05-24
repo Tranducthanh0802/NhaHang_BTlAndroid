@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/anh_ds_ofchude_adap"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ten san pham"
+        android:layout_toRightOf="@id/anh_ds_ofchude_adap"
+        android:textSize="16sp"
+        android:id="@+id/txtTen_ds_ofchude_adap"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nha cung cap"
+        android:layout_toRightOf="@id/anh_ds_ofchude_adap"
+        android:layout_below="@id/txtTen_ds_ofchude_adap"
+        android:id="@+id/txtNCC_ds_ofchude_adap"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gia tien"
+        android:layout_toRightOf="@id/anh_ds_ofchude_adap"
+        android:layout_below="@id/txtNCC_ds_ofchude_adap"
+        android:id="@+id/txtTien_ds_ofchude_adap"
+        android:textSize="16sp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mua"
+        android:id="@+id/btnMua"
+        android:layout_alignBottom="@id/anh_ds_ofchude_adap"
+        android:layout_alignRight="@id/txtTen_ds_ofchude_adap"
+        android:layout_alignLeft="@id/txtTen_ds_ofchude_adap"
+        android:background="#F44336"
+        android:textColor="#F5F5ED"
+        />
+
+</RelativeLayout>
