@@ -121,16 +121,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
             }
         });
         requestQueue.add(request);
-        adapter.setClick(new onLongclick() {
-            @Override
-            public void ItemLongClicked(View v, int position) {
-                tong-=Integer.parseInt(list.get(position).getTien());
-                txtSotien.setText(tong+"");
-                list.remove(position);
-                adapter.notifyDataSetChanged();
-                v.showContextMenu();
-            }
-        });
+
     }
 
     @Override

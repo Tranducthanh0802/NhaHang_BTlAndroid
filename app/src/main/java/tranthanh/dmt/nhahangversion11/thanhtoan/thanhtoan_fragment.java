@@ -1,5 +1,7 @@
 package tranthanh.dmt.nhahangversion11.thanhtoan;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,6 +75,7 @@ public class thanhtoan_fragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         tinhtongtien();
+
         btnThanhTOan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +99,7 @@ public class thanhtoan_fragment extends Fragment {
                         getActivity().getSupportFragmentManager().popBackStack();
                         count--;
                     }
+                    HienAlert();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, chude_fragment.newInstance()).commit();
                 } else {
                     Toast.makeText(getActivity(), "Hay chon hinh thuc thanh toan", Toast.LENGTH_SHORT).show();
@@ -103,6 +107,7 @@ public class thanhtoan_fragment extends Fragment {
                 }
             }
         });
+
         return view;
     }
 
@@ -112,5 +117,16 @@ public class thanhtoan_fragment extends Fragment {
             tongtien += list.get(i).getSl() * Integer.parseInt(list.get(i).getTien());
         }
         txtTongtien.setText(tongtien + "");
+    }
+    private  void HienAlert(){
+        AlertDialog.Builder builder =new AlertDialog.Builder(getContext());
+        builder.setMessage(R.string.aler).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+       AlertDialog alertDialog=  builder.create();
+       alertDialog.show();
     }
 }

@@ -14,8 +14,8 @@ import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 public class trunggian {
 
 
-    public static String linkchude="http://192.168.1.5:8080/chude.php";
-    public static  String linkHangHoa="http://192.168.1.5:8080/NhaHang/dulieu.php";
+    public static String linkchude="http://192.168.1.14:8080/chude.php";
+    public static  String linkHangHoa="http://192.168.1.14:8080/NhaHang/dulieu.php";
     public static void luu(String ten,String dulieu, Context context){
         SharedPreferences pre=context.getSharedPreferences("my_data",context.MODE_PRIVATE);
         SharedPreferences.Editor edit=pre.edit();

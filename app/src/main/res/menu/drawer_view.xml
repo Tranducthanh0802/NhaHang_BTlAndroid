@@ -3,6 +3,7 @@
     <group android:checkableBehavior="single">
     <item android:id="@+id/lienHeCuocGoi"
         android:title="Lien he den tong dai 18001900"
+        android:icon="@drawable/ic_call_black_24dp"
         />
        <item android:title="Mo Nhac"
             android:id="@+id/amNhac"

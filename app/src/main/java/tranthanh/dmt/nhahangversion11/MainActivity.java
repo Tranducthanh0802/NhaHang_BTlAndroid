@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.database.Cursor;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -35,12 +38,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import tranthanh.dmt.nhahangversion11.Trangchu.chude_fragment;
-import tranthanh.dmt.nhahangversion11.Trangchu.dong_awc;
-import tranthanh.dmt.nhahangversion11.Trangchu.ds_trangchu_adap;
-import tranthanh.dmt.nhahangversion11.chude.hanghoa_ofchude_fragment;
 import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 import tranthanh.dmt.nhahangversion11.giohang.giohang_fragment;
 
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
     AutoCompleteTextView edtAuto;
     public static ArrayList<String> nameMon;
     public static int  i=0;
+    private static final int REQUEST_CALL=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
         mDrawerLayout = findViewById(R.id.drawer_layout);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom);
+        navigation.setOnNavigationItemSelectedListener(mNavigationItemReselectedListener);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
                         break;
                     case R.id.lienHeCuocGoi:
                         Log.d("abc", "onNavigationItemSelected: lien he cuoc goi");
+                        makePhoneCall();
                         break;
                 }
                 menuItem.setChecked(true);
@@ -174,4 +177,40 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
         i++;
         tangsl(MainActivity.i+"");
     }
+    private void makePhoneCall()
+    {
+        int number=18001900;
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial = "tel:" + (number + "");
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+        }
+
+    }
+
+    BottomNavigationView.OnNavigationItemSelectedListener mNavigationItemReselectedListener= new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.trangchu:
+                    getSupportFragmentManager().beginTransaction().addToBackStack("chude").replace(R.id.content_frame, chude_fragment.newInstance()).commit();
+                    return true;
+                case R.id.giohang_bottom_main:
+                    if(nameMon!=null) {
+                        trunggian.luuMang("MangMonAn", nameMon, getBaseContext());
+                    }else{
+                        nameMon=null;
+                        trunggian.luuMang("MangMonAn",nameMon, getBaseContext());
+                    }
+                    getSupportFragmentManager().beginTransaction().addToBackStack("giohang").replace(R.id.content_frame, giohang_fragment.newInstance()).commit();
+                    return true;
+
+            }
+            return false;
+            }
+
+    };
 }

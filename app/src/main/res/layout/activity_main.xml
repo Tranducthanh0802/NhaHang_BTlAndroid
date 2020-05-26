@@ -26,6 +26,7 @@
             android:layout_toLeftOf="@id/aaaa"
             android:completionThreshold="1"
             android:id="@+id/AutoCom"
+            android:layout_marginTop="10dp"
             android:completionHint="Tim kiem mon an"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             />
@@ -43,17 +44,18 @@
                 android:layout_height="70dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
-                android:src="@drawable/ic_shopping_cart_black_24dp" />
+                android:src="@drawable/ic_shopping_cart_black2_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/imgShop_Main"
+               android:layout_marginTop="37dp"
                 android:layout_alignRight="@id/imgShop_Main"
                 android:text="0"
-                android:textSize="16sp"
-                android:paddingBottom="10dp"
-                android:background="#81FF33"
+                android:textColor="#F50435"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:background="@drawable/custom_button"
                 android:id="@+id/slshop_Main"
                 />
         </RelativeLayout>
@@ -64,14 +66,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-
         </FrameLayout>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:id="@+id/bottom"
+            app:itemIconTint="@android:color/white"
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/bottom_view"
-            android:background="#202015"
+
+            app:itemTextColor="@android:color/white"
+            android:background="#F44336"
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
