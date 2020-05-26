@@ -6,27 +6,53 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 import tranthanh.dmt.nhahangversion11.Trangchu.chude_fragment;
+import tranthanh.dmt.nhahangversion11.Trangchu.dong_awc;
+import tranthanh.dmt.nhahangversion11.Trangchu.ds_trangchu_adap;
 import tranthanh.dmt.nhahangversion11.chude.hanghoa_ofchude_fragment;
+import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 import tranthanh.dmt.nhahangversion11.giohang.giohang_fragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  chuyendulieu{
     private DrawerLayout mDrawerLayout;
-     static TextView txtSl;
-     ImageView img;
+    static TextView txtSl;
+    ImageView img;
+    ArrayList<dong_sp_giohang> list1;
+    arrayAdapter_autoText adapter1;
+    AutoCompleteTextView edtAuto;
+    public static ArrayList<String> nameMon;
+    public static int  i=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,24 +60,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
-        img=findViewById(R.id.imgShop_Main);
-        txtSl=findViewById(R.id.slshop_Main);
-        ActionBar actionBar=getSupportActionBar();
+        nameMon=new ArrayList<>();
+        hamchude1();
+        edtAuto=findViewById(R.id.AutoCom);
+        img = findViewById(R.id.imgShop_Main);
+        txtSl = findViewById(R.id.slshop_Main);
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
-        mDrawerLayout=findViewById(R.id.drawer_layout);
-        NavigationView navigationView=findViewById(R.id.nav_view);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-               switch (menuItem.getItemId()){
-                   case R.id.amNhac:
-                       Log.d("abc", "onNavigationItemSelected: am nhac");
-                       break;
-                   case R.id.lienHeCuocGoi:
-                       Log.d("abc", "onNavigationItemSelected: lien he cuoc goi");
-                       break;
-               }
+                switch (menuItem.getItemId()) {
+                    case R.id.amNhac:
+                        Log.d("abc", "onNavigationItemSelected: am nhac");
+                        break;
+                    case R.id.lienHeCuocGoi:
+                        Log.d("abc", "onNavigationItemSelected: lien he cuoc goi");
+                        break;
+                }
                 menuItem.setChecked(true);
                 return true;
             }
@@ -59,44 +88,37 @@ public class MainActivity extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trunggian.luuMang("MangMonAn", hanghoa_ofchude_fragment.nameMon,getBaseContext());
+                if(nameMon!=null) {
+                    trunggian.luuMang("MangMonAn", nameMon, getBaseContext());
+                }else{
+                    nameMon=null;
+                    trunggian.luuMang("MangMonAn",nameMon, getBaseContext());
+
+                }
                 getSupportFragmentManager().beginTransaction().addToBackStack("giohang").replace(R.id.content_frame, giohang_fragment.newInstance()).commit();
-
-
             }
         });
-         getSupportFragmentManager().beginTransaction().addToBackStack("chude").replace(R.id.content_frame, chude_fragment.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction().addToBackStack("chude").replace(R.id.content_frame, chude_fragment.newInstance()).commit();
 
     }
-    public static void tangsl(String sl){
-        txtSl.setText(sl+"");
+
+    public static void tangsl(String sl) {
+        txtSl.setText(sl + "");
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
-                return  true;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.timkiem,menu);
-        android.widget.SearchView searchView= (android.widget.SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -108,5 +130,48 @@ public class MainActivity extends AppCompatActivity {
         } else {
             getSupportFragmentManager().popBackStack();
         }
+    }
+    void hamchude1(){
+        list1= new ArrayList<>();
+        readJson(list1, trunggian.linkHangHoa,this);
+
+    }
+    public void readJson(final ArrayList<dong_sp_giohang> lst,  String url, final  chuyendulieu ion){
+        RequestQueue requestQueue= Volley.newRequestQueue(getBaseContext());
+        JsonArrayRequest request=new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for(int i=0;i<response.length();i++){
+                    try {
+                        JSONObject object=response.getJSONObject(i);
+                        String anh =object.getString("Img");
+                        String ten=object.getString("Name");
+                        String Ncc = object.getString("NCC");
+                        String Tien = String.valueOf(object.getInt("Gia"));
+                        lst.add(new dong_sp_giohang(anh, ten, Ncc, Tien));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                adapter1 =new arrayAdapter_autoText(getBaseContext(),lst,ion);
+
+                edtAuto.setAdapter(adapter1);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getBaseContext(), "loi!"+error.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        requestQueue.add(request);
+    }
+
+    @Override
+    public void sendata(String s) {
+        nameMon.add(s);
+        i++;
+        tangsl(MainActivity.i+"");
     }
 }

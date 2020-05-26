@@ -36,8 +36,8 @@ public class hanghoa_ofchude_fragment extends Fragment implements chuyendulieu {
     hanghoa_ofchude_adapter adapter;
     RecyclerView recyclerView;
     String b="";
-    public static ArrayList<String> nameMon;
-    int i=0;
+
+
 
     public static hanghoa_ofchude_fragment newInstance() {
 
@@ -55,7 +55,6 @@ public class hanghoa_ofchude_fragment extends Fragment implements chuyendulieu {
         recyclerView=(RecyclerView) view.findViewById(R.id.reCyDs_hanghoaOfchude);
         b= trunggian.laydulieu("tenchude",getContext());
         hamchude(view);
-        nameMon=new ArrayList<>();
         return view;
     }
     void hamchude(View view){
@@ -76,7 +75,6 @@ public class hanghoa_ofchude_fragment extends Fragment implements chuyendulieu {
                         JSONObject object=response.getJSONObject(i);
                         String anh =object.getString("Img");
                         String ten=object.getString("Name");
-                        Log.d("abc", "onResponse: "+b+object.getString("Loai"));
                         if(!object.isNull("NCC")) {
                             if(object.getString("Loai").contains(b)) {
                                 String Ncc = object.getString("NCC");
@@ -109,8 +107,8 @@ public class hanghoa_ofchude_fragment extends Fragment implements chuyendulieu {
 
     @Override
     public void sendata(String s) {
-        nameMon.add(s);
-        i++;
-        MainActivity.tangsl(i+"");
+        MainActivity.nameMon.add(s);
+        MainActivity.i++;
+        MainActivity.tangsl(MainActivity.i+"");
     }
 }

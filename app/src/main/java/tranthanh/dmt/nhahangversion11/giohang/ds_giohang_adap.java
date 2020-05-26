@@ -1,8 +1,9 @@
 package tranthanh.dmt.nhahangversion11.giohang;
 
 import android.content.Context;
-import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,18 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tranthanh.dmt.nhahangversion11.R;
+import tranthanh.dmt.nhahangversion11.thanhtoan.dong_sp_thanhtoan;
 
 public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHolder> {
     List<dong_sp_giohang> listsp;
+    ArrayList<dong_sp_thanhtoan> listspTT;
     Context context;
     sl_ion ion;
+    onLongclick click;
+
+    public void setClick(onLongclick click) {
+        this.click = click;
+    }
 
     public ds_giohang_adap(List<dong_sp_giohang> listsp, Context context) {
         this.listsp = listsp;
         this.context = context;
+
     }
 
     public ds_giohang_adap(List<dong_sp_giohang> listsp, Context context, sl_ion ion) {
@@ -54,6 +64,7 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
             public void onClick(View view) {
                 ion.sltang(holder.txtTien.getText().toString()+"");
                 int a= Integer.parseInt(holder.txtSl.getText().toString())+1;
+                listsp.get(position).setSl(a);
                 holder.txtSl.setText(a+"");
             }
         });
@@ -64,6 +75,7 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
                     ion.slgiam((holder.txtTien.getText().toString())+"");
                     int a= Integer.parseInt(holder.txtSl.getText().toString())-1;
                     holder.txtSl.setText(a+"");
+                    listsp.get(position).setSl(a);
                 }
             }
         });
@@ -73,6 +85,15 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
                 ion.xoa(listsp.get(position));
             }
         });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                click.ItemLongClicked(view,position);
+                return true;
+            }
+        });
+
+
     }
 
     @Override
@@ -80,10 +101,13 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
         return listsp.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img,imgXOa;
         TextView txtNCC,txtTien,txtSl,txtTen;
         Button btnTru,btnCong;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img=itemView.findViewById(R.id.anh_ds_giohang_adap);
@@ -94,6 +118,8 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
             btnTru=itemView.findViewById(R.id.btnTru_ds_giohang_adap);
             btnCong=itemView.findViewById(R.id.btnCong_gioHang_adap);
             imgXOa=itemView.findViewById(R.id.imgXoa_giohang_adap);
+
+
         }
     }
 }

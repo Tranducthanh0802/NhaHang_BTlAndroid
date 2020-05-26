@@ -2,9 +2,12 @@ package tranthanh.dmt.nhahangversion11.giohang;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +42,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
     ds_giohang_adap adapter;
     ArrayList<dong_sp_giohang> list;
     ArrayList<String> listten;
+
     int tong=0;
     public static giohang_fragment newInstance() {
 
@@ -59,6 +63,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
         btnThanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                trunggian.luuMangGioHang("ListThanhToan",list,getActivity());
                 getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("thanhtoan").replace(R.id.content_frame, thanhtoan_fragment.newInstance()).commit();
             }
         });
@@ -77,32 +82,36 @@ public class giohang_fragment extends Fragment implements sl_ion {
             @Override
             public void onResponse(JSONArray response) {
                 listten = trunggian.laydulieuMang("MangMonAn", view.getContext());
-                for(int i=0;i<response.length();i++){
-                    try {
-                        JSONObject object=response.getJSONObject(i);
-                        String anh =object.getString("Img");
-                        String ten=object.getString("Name");
-                        if(!object.isNull("NCC")) {
+                if (listten != null) {
+                    tong = 0;
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject object = response.getJSONObject(i);
+                            String anh = object.getString("Img");
+                            String ten = object.getString("Name");
+                            if (!object.isNull("NCC")) {
 
                                 String Ncc = object.getString("NCC");
                                 String Tien = String.valueOf(object.getInt("Gia"));
-                                for(int j=0;j<listten.size();j++){
-                                    if (ten.equals(listten.get(j))){
+                                for (int j = 0; j < listten.size(); j++) {
+                                    if (ten.equals(listten.get(j))) {
                                         list.add(new dong_sp_giohang(anh, ten, Ncc, Tien));
-                                       tong+= Integer.parseInt(Tien);
+                                        tong += Integer.parseInt(Tien);
                                     }
                                 }
 
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+                    adapter = new ds_giohang_adap(list, view.getContext(), ion);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(adapter);
+                    txtSotien.setText(tong + "");
+                    registerForContextMenu(recyclerView);
                 }
-                adapter =new ds_giohang_adap(list,view.getContext(),ion);
-                RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL,false);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(adapter);
-                txtSotien.setText(tong+"");
             }
         }, new Response.ErrorListener() {
             @Override
@@ -112,6 +121,16 @@ public class giohang_fragment extends Fragment implements sl_ion {
             }
         });
         requestQueue.add(request);
+        adapter.setClick(new onLongclick() {
+            @Override
+            public void ItemLongClicked(View v, int position) {
+                tong-=Integer.parseInt(list.get(position).getTien());
+                txtSotien.setText(tong+"");
+                list.remove(position);
+                adapter.notifyDataSetChanged();
+                v.showContextMenu();
+            }
+        });
     }
 
     @Override
@@ -137,4 +156,20 @@ public class giohang_fragment extends Fragment implements sl_ion {
 
     }
 
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()){
+            case R.id.xoa_context_giohang:
+
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.context_giohang,menu);
+    }
 }

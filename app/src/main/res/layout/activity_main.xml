@@ -19,9 +19,20 @@
             android:id="@+id/toolbar"
             android:background="?attr/colorPrimary"
             />
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/toolbar"
+            android:layout_toLeftOf="@id/aaaa"
+            android:completionThreshold="1"
+            android:id="@+id/AutoCom"
+            android:completionHint="Tim kiem mon an"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            />
         <RelativeLayout
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
+            android:id="@+id/aaaa"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             >
@@ -39,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/imgShop_Main"
                 android:layout_alignRight="@id/imgShop_Main"
-                android:text="1"
+                android:text="0"
                 android:textSize="16sp"
                 android:paddingBottom="10dp"
                 android:background="#81FF33"

@@ -3,8 +3,17 @@ package tranthanh.dmt.nhahangversion11.thanhtoan;
 public class dong_sp_thanhtoan {
     String anh;
     String ncc;
-    String sl;
+    int sl;
     String tongtien;
+    String name;
+
+    public dong_sp_thanhtoan(String anh, String ncc, int sl, String tongtien, String name) {
+        this.anh = anh;
+        this.ncc = ncc;
+        this.sl = sl;
+        this.tongtien = tongtien;
+        this.name = name;
+    }
 
     public String getAnh() {
         return anh;
@@ -22,11 +31,11 @@ public class dong_sp_thanhtoan {
         this.ncc = ncc;
     }
 
-    public String getSl() {
+    public int getSl() {
         return sl;
     }
 
-    public void setSl(String sl) {
+    public void setSl(int sl) {
         this.sl = sl;
     }
 
@@ -38,10 +47,11 @@ public class dong_sp_thanhtoan {
         this.tongtien = tongtien;
     }
 
-    public dong_sp_thanhtoan(String anh, String ncc, String sl, String tongtien) {
-        this.anh = anh;
-        this.ncc = ncc;
-        this.sl = sl;
-        this.tongtien = tongtien;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -10,13 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import tranthanh.dmt.nhahangversion11.R;
+import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 
 public class ds_sp_thanhToan_adap extends RecyclerView.Adapter<ds_sp_thanhToan_adap.ViewHolder> {
-    List<dong_sp_thanhtoan> listsp;
+    List<dong_sp_giohang> listsp;
     Context context;
+
+    public ds_sp_thanhToan_adap(List<dong_sp_giohang> listsp, Context context) {
+        this.listsp = listsp;
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,7 +36,13 @@ public class ds_sp_thanhToan_adap extends RecyclerView.Adapter<ds_sp_thanhToan_a
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        dong_sp_giohang sp=listsp.get(position);
+        int tongtien=sp.getSl()*Integer.parseInt( sp.getTien());
+        Picasso.with(context).load(sp.getAnh().toString()).into(holder.img);
+        holder.txtten.setText(sp.getName());
+        holder.txtNCC.setText(sp.getNcc());
+        holder.txtTongTien.setText(tongtien+"");
+        holder.txtSL.setText(sp.getSl()+"");
     }
 
     @Override

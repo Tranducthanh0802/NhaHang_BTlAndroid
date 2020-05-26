@@ -2,31 +2,14 @@ package tranthanh.dmt.nhahangversion11;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tranthanh.dmt.nhahangversion11.Trangchu.dong_chude_trangchu;
+import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 
 public class trunggian {
 
@@ -53,12 +36,29 @@ public class trunggian {
         edit.putString(ten, json);
         edit.commit();
     }
+    public static void luuMangGioHang(String ten,ArrayList<dong_sp_giohang> dulieu, Context context){
+        SharedPreferences pre=context.getSharedPreferences("my_data",context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=pre.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(dulieu);
+        edit.remove(ten).commit();
+        edit.putString(ten, json);
+        edit.commit();
+    }
     public static ArrayList<String> laydulieuMang(String ten, Context context) {
         SharedPreferences pre = context.getSharedPreferences("my_data", context.MODE_PRIVATE);
         Gson gson=new Gson();
         String response=pre.getString(ten, "");
         ArrayList<String> lstArrayList = gson.fromJson(response,
                 new TypeToken<List<String>>(){}.getType());
+        return  lstArrayList;
+    }
+    public static ArrayList<dong_sp_giohang> laydulieuMangGioHang(String ten, Context context) {
+        SharedPreferences pre = context.getSharedPreferences("my_data", context.MODE_PRIVATE);
+        Gson gson=new Gson();
+        String response=pre.getString(ten, "");
+        ArrayList<dong_sp_giohang> lstArrayList = gson.fromJson(response,
+                new TypeToken<List<dong_sp_giohang>>(){}.getType());
         return  lstArrayList;
     }
 }

@@ -1,10 +1,45 @@
 package tranthanh.dmt.nhahangversion11.giohang;
 
-public class dong_sp_giohang {
+public class dong_sp_giohang implements Comparable<dong_sp_giohang> {
     String anh;
     String Ncc;
     String name;
     String tien;
+    int sl=1;
+    int luotxem=0;
+
+    public int getLuotxem() {
+        return luotxem;
+    }
+
+    public void setLuotxem(int luotxem) {
+        this.luotxem = luotxem;
+    }
+
+    public dong_sp_giohang(String anh, String ncc, String name, String tien, int luotxem) {
+        this.anh = anh;
+        Ncc = ncc;
+        this.name = name;
+        this.tien = tien;
+        this.luotxem = luotxem;
+    }
+
+    public dong_sp_giohang(String anh, String ncc, String name, String tien, int sl, int luotxem) {
+        this.anh = anh;
+        Ncc = ncc;
+        this.name = name;
+        this.tien = tien;
+        this.sl = sl;
+        this.luotxem = luotxem;
+    }
+
+    public int getSl() {
+        return sl;
+    }
+
+    public void setSl(int sl) {
+        this.sl = sl;
+    }
 
     public String getAnh() {
         return anh;
@@ -43,5 +78,15 @@ public class dong_sp_giohang {
         Ncc = ncc;
         this.name = name;
         this.tien = tien;
+    }
+
+    @Override
+    public int compareTo(dong_sp_giohang dong_sp_giohang) {
+        if (luotxem == dong_sp_giohang.luotxem)
+            return 0;
+        else if (luotxem > dong_sp_giohang.luotxem)
+            return -1;
+        else
+            return 1;
     }
 }
