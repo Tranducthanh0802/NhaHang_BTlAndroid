@@ -44,8 +44,9 @@ public class giohang_fragment extends Fragment implements sl_ion {
     ds_giohang_adap adapter;
     List<dong_sp_giohang> list;
     List<String> listten;
-    int vitri=0;
-    int tong=0;
+    int vitri = 0;
+    int tong = 0;
+
     public static giohang_fragment newInstance() {
 
         Bundle args = new Bundle();
@@ -58,14 +59,14 @@ public class giohang_fragment extends Fragment implements sl_ion {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.giohang_view,container,false);
-        recyclerView=view.findViewById(R.id.RecyslSp_giohang);
-        txtSotien=view.findViewById(R.id.sotien_giohang);
-        btnThanhtoan=view.findViewById(R.id.btnThanhtoan_giohang);
+        View view = inflater.inflate(R.layout.giohang_view, container, false);
+        recyclerView = view.findViewById(R.id.RecyslSp_giohang);
+        txtSotien = view.findViewById(R.id.sotien_giohang);
+        btnThanhtoan = view.findViewById(R.id.btnThanhtoan_giohang);
         btnThanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trunggian.luuMangGioHang("ListThanhToan", (ArrayList<dong_sp_giohang>) list,getActivity());
+                trunggian.luuMangGioHang("ListThanhToan", (ArrayList<dong_sp_giohang>) list, getActivity());
                 getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("thanhtoan").replace(R.id.content_frame, thanhtoan_fragment.newInstance()).commit();
                 MainActivity.check(getView());
             }
@@ -75,14 +76,16 @@ public class giohang_fragment extends Fragment implements sl_ion {
 
         return view;
     }
-    void hamchude(View view){
-        list =new ArrayList<>();
-        readJson((ArrayList<dong_sp_giohang>) list,view,trunggian.linkHangHoa,this);
+
+    void hamchude(View view) {
+        list = new ArrayList<>();
+        readJson((ArrayList<dong_sp_giohang>) list, view, trunggian.linkHangHoa, this);
 
     }
-    public void readJson(final ArrayList<dong_sp_giohang> list, final View view, String url, final sl_ion ion){
-        RequestQueue requestQueue= Volley.newRequestQueue(view.getContext());
-        JsonArrayRequest request=new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
+    public void readJson(final ArrayList<dong_sp_giohang> list, final View view, String url, final sl_ion ion) {
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 listten = trunggian.laydulieuMang("MangMonAn", view.getContext());
@@ -113,7 +116,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
                     adapter.setClick(new ds_giohang_adap.onLongclick() {
                         @Override
                         public void ItemLongClicked(View v, int position) {
-                            vitri=position;
+                            vitri = position;
                             v.showContextMenu();
                         }
                     });
@@ -127,8 +130,8 @@ public class giohang_fragment extends Fragment implements sl_ion {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(view.getContext(), "loi!"+error.toString(), Toast.LENGTH_SHORT).show();
-                Log.d("abc", "onErrorResponse: "+error.toString());
+                Toast.makeText(view.getContext(), "loi!" + error.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("abc", "onErrorResponse: " + error.toString());
             }
         });
         requestQueue.add(request);
@@ -137,15 +140,15 @@ public class giohang_fragment extends Fragment implements sl_ion {
 
     @Override
     public void sltang(String name) {
-        tong+=Integer.parseInt(name);
+        tong += Integer.parseInt(name);
 
-        txtSotien.setText(tong+"");
+        txtSotien.setText(tong + "");
     }
 
     @Override
     public void slgiam(String name) {
-        tong-=Integer.parseInt(name);
-        txtSotien.setText(tong+"");
+        tong -= Integer.parseInt(name);
+        txtSotien.setText(tong + "");
 
     }
 
@@ -153,21 +156,20 @@ public class giohang_fragment extends Fragment implements sl_ion {
     public void xoa(dong_sp_giohang sp) {
         list.remove(sp);
         adapter.notifyDataSetChanged();
-        tong-=Integer.parseInt(sp.getTien());
-        txtSotien.setText(tong+"");
+        tong -= Integer.parseInt(sp.getTien());
+        txtSotien.setText(tong + "");
         xoagiohang(sp.getName());
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.xoa_context_giohang:
                 xoagiohang(list.get(vitri).getName());
-                tong-=Integer.parseInt(list.get(vitri).getTien());
-                txtSotien.setText(tong+"");
+                tong -= Integer.parseInt(list.get(vitri).getTien());
+                txtSotien.setText(tong + "");
                 list.remove(vitri);
                 adapter.notifyDataSetChanged();
-
                 break;
         }
         return true;
@@ -176,13 +178,14 @@ public class giohang_fragment extends Fragment implements sl_ion {
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getActivity().getMenuInflater().inflate(R.menu.context_giohang,menu);
+        getActivity().getMenuInflater().inflate(R.menu.context_giohang, menu);
     }
-   public void xoagiohang(String name){
+
+    public void xoagiohang(String name) {
         MainActivity.nameMon.remove(name);
         trunggian.luuMang("MangMonAn", MainActivity.nameMon, getContext());
         MainActivity.i--;
-        MainActivity.tangsl(MainActivity.i+"");
+        MainActivity.tangsl(MainActivity.i + "");
 
     }
 }

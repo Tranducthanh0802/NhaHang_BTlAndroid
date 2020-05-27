@@ -110,45 +110,49 @@ public class chude_fragment extends Fragment implements interface_Sukien,chuyend
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //((TextView) adapterView.getChildAt(0)).setTextColor(Color.RED);
-                switch (i){
-                    case 0:
-                        Collections.sort(list1);
-                        adapter1.notifyDataSetChanged();
-                        break;
-                    case  1:
-                        Collections.sort(list1, new Comparator<dong_sp_giohang>() {
-                            @Override
-                            public int compare(dong_sp_giohang dong_sp_giohang, dong_sp_giohang t1) {
-                                int a=Integer.parseInt(dong_sp_giohang.getTien());
-                                int b=Integer.parseInt(t1.getTien());
-                                if (a == b)
-                                    return 0;
-                                else if (a< b)
-                                    return -1;
-                                else
-                                    return 1;
-                            }
-                        });
-                        adapter1.notifyDataSetChanged();
+                try {
+                    switch (i) {
+                        case 0:
+                            Collections.sort(list1);
+                            adapter1.notifyDataSetChanged();
+                            break;
+                        case 1:
+                            Collections.sort(list1, new Comparator<dong_sp_giohang>() {
+                                @Override
+                                public int compare(dong_sp_giohang dong_sp_giohang, dong_sp_giohang t1) {
+                                    int a = Integer.parseInt(dong_sp_giohang.getTien());
+                                    int b = Integer.parseInt(t1.getTien());
+                                    if (a == b)
+                                        return 0;
+                                    else if (a < b)
+                                        return -1;
+                                    else
+                                        return 1;
+                                }
+                            });
+                            adapter1.notifyDataSetChanged();
 
-                        break;
-                    case 2:
-                        Collections.sort(list1, new Comparator<dong_sp_giohang>() {
-                            @Override
-                            public int compare(dong_sp_giohang dong_sp_giohang, dong_sp_giohang t1) {
-                                int a=Integer.parseInt(dong_sp_giohang.getTien());
-                                int b=Integer.parseInt(t1.getTien());
-                                if (a == b)
-                                    return 0;
-                                else if (a> b)
-                                    return -1;
-                                else
-                                    return 1;
-                            }
-                        });
-                        adapter1.notifyDataSetChanged();
+                            break;
+                        case 2:
+                            Collections.sort(list1, new Comparator<dong_sp_giohang>() {
+                                @Override
+                                public int compare(dong_sp_giohang dong_sp_giohang, dong_sp_giohang t1) {
+                                    int a = Integer.parseInt(dong_sp_giohang.getTien());
+                                    int b = Integer.parseInt(t1.getTien());
+                                    if (a == b)
+                                        return 0;
+                                    else if (a > b)
+                                        return -1;
+                                    else
+                                        return 1;
+                                }
+                            });
+                            adapter1.notifyDataSetChanged();
 
-                        break;
+                            break;
+                    }
+                }catch (Exception e){
+
                 }
             }
 
