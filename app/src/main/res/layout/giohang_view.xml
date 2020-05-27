@@ -6,13 +6,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:paddingTop="10dp"
+        android:layout_height="@dimen/_320sdp"
+        android:paddingTop="@dimen/_5sdp"
        android:id="@+id/RecyslSp_giohang"
 
         />
     <RelativeLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_below="@id/RecyslSp_giohang"
         android:layout_height="wrap_content"
@@ -21,24 +21,25 @@
         >
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_20sdp"
             android:text="tam tinh:"
-            android:textSize="16sp"
+            android:textSize="@dimen/_13sdp"
             android:layout_above="@+id/btnThanhtoan_giohang"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="16sp"
+            android:textSize="@dimen/_13sdp"
             android:id="@+id/sotien_giohang"
+            android:textColor="@color/colorName"
             android:layout_above="@+id/btnThanhtoan_giohang"
             />
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_30sdp"
             android:layout_alignParentBottom="true"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/_5sdp"
             android:text="Thanh Toan"
             android:id="@+id/btnThanhtoan_giohang"
             />

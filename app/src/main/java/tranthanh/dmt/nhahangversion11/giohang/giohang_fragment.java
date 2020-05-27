@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import tranthanh.dmt.nhahangversion11.MainActivity;
 import tranthanh.dmt.nhahangversion11.R;
 import tranthanh.dmt.nhahangversion11.thanhtoan.thanhtoan_fragment;
 import tranthanh.dmt.nhahangversion11.trunggian;
@@ -42,7 +43,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
     ds_giohang_adap adapter;
     ArrayList<dong_sp_giohang> list;
     ArrayList<String> listten;
-
+    int vitri=0;
     int tong=0;
     public static giohang_fragment newInstance() {
 
@@ -65,10 +66,12 @@ public class giohang_fragment extends Fragment implements sl_ion {
             public void onClick(View view) {
                 trunggian.luuMangGioHang("ListThanhToan",list,getActivity());
                 getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("thanhtoan").replace(R.id.content_frame, thanhtoan_fragment.newInstance()).commit();
+                MainActivity.check(getView());
             }
         });
-
+        registerForContextMenu(recyclerView);
         hamchude(view);
+
         return view;
     }
     void hamchude(View view){
@@ -106,11 +109,18 @@ public class giohang_fragment extends Fragment implements sl_ion {
                         }
                     }
                     adapter = new ds_giohang_adap(list, view.getContext(), ion);
+                    adapter.setClick(new ds_giohang_adap.onLongclick() {
+                        @Override
+                        public void ItemLongClicked(View v, int position) {
+                            vitri=position;
+                            v.showContextMenu();
+                        }
+                    });
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(adapter);
                     txtSotien.setText(tong + "");
-                    registerForContextMenu(recyclerView);
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -144,23 +154,34 @@ public class giohang_fragment extends Fragment implements sl_ion {
         adapter.notifyDataSetChanged();
         tong-=Integer.parseInt(sp.getTien());
         txtSotien.setText(tong+"");
-
+        xoagiohang(sp.getName());
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()){
             case R.id.xoa_context_giohang:
+                xoagiohang(list.get(vitri).getName());
+                tong-=Integer.parseInt(list.get(vitri).getTien());
+                txtSotien.setText(tong+"");
+                list.remove(vitri);
+                adapter.notifyDataSetChanged();
 
                 break;
         }
-        return super.onContextItemSelected(item);
+        return true;
     }
 
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getActivity().getMenuInflater().inflate(R.menu.context_giohang,menu);
+    }
+   public void xoagiohang(String name){
+        MainActivity.nameMon.remove(name);
+        trunggian.luuMang("MangMonAn", MainActivity.nameMon, getContext());
+        MainActivity.i--;
+        MainActivity.tangsl(MainActivity.i+"");
+
     }
 }

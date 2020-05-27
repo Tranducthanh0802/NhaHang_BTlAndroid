@@ -5,8 +5,9 @@
         android:title="Lien he den tong dai 18001900"
         android:icon="@drawable/ic_call_black_24dp"
         />
-       <item android:title="Mo Nhac"
-            android:id="@+id/amNhac"
+       <item android:title="Xoa toan bo gio hang"
+            android:id="@+id/deleteDraw"
+           android:icon="@drawable/ic_delete_forever_black_24dp"
            />
     </group>
 </menu>

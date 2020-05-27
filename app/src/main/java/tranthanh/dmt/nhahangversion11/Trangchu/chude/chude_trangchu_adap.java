@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import tranthanh.dmt.nhahangversion11.MainActivity;
 import tranthanh.dmt.nhahangversion11.R;
 import tranthanh.dmt.nhahangversion11.chude.dong_hoahoa_ofchude;
 import tranthanh.dmt.nhahangversion11.interface_Sukien;
@@ -59,7 +60,7 @@ public class chude_trangchu_adap extends RecyclerView.Adapter<chude_trangchu_ada
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
         TextView txt;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             img=itemView.findViewById(R.id.anh_chude_trangchu_adap);
             txt=itemView.findViewById(R.id.txtTen_ds_trangchu_adap);
@@ -67,6 +68,7 @@ public class chude_trangchu_adap extends RecyclerView.Adapter<chude_trangchu_ada
                 @Override
                 public void onClick(View view) {
                     ion.TenChude(txt.getText().toString()+"");
+                    MainActivity.check(itemView);
                 }
             });
         }

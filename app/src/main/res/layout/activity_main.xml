@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
+    android:background="#fcf8f3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -21,12 +22,14 @@
             />
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@id/toolbar"
             android:layout_toLeftOf="@id/aaaa"
+            android:layout_above="@id/content_frame"
             android:completionThreshold="1"
+            android:background="#fcf8f3"
             android:id="@+id/AutoCom"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:completionHint="Tim kiem mon an"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             />
@@ -35,13 +38,13 @@
             android:layout_width="wrap_content"
             android:id="@+id/aaaa"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/_5sdp"
             >
 
             <ImageView
                 android:id="@+id/imgShop_Main"
-                android:layout_width="30dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
                 android:src="@drawable/ic_shopping_cart_black2_24dp" />
@@ -49,12 +52,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_marginTop="37dp"
+               android:layout_marginTop="@dimen/_22sdp"
                 android:layout_alignRight="@id/imgShop_Main"
                 android:text="0"
                 android:textColor="#F50435"
                 android:gravity="center"
-                android:textSize="14sp"
+                android:textSize="@dimen/_10sdp"
                 android:background="@drawable/custom_button"
                 android:id="@+id/slshop_Main"
                 />
@@ -71,7 +74,7 @@
             android:layout_width="match_parent"
             android:id="@+id/bottom"
             app:itemIconTint="@android:color/white"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="@dimen/_30sdp"
             app:menu="@menu/bottom_view"
 
             app:itemTextColor="@android:color/white"
@@ -85,6 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#fcf8f3"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_view" />

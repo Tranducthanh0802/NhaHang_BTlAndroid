@@ -13,13 +13,17 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +42,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-import tranthanh.dmt.nhahangversion11.Trangchu.chude_fragment;
+import tranthanh.dmt.nhahangversion11.Trangchu.ds_sp_Hot.chude_fragment;
 import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 import tranthanh.dmt.nhahangversion11.giohang.giohang_fragment;
 
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
     ArrayList<dong_sp_giohang> list1;
     arrayAdapter_autoText adapter1;
     AutoCompleteTextView edtAuto;
+    Spinner spinner;
     public static ArrayList<String> nameMon;
     public static int  i=0;
     private static final int REQUEST_CALL=1;
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
         edtAuto=findViewById(R.id.AutoCom);
         img = findViewById(R.id.imgShop_Main);
         txtSl = findViewById(R.id.slshop_Main);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
@@ -76,11 +83,14 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.amNhac:
+                    case R.id.deleteDraw:
+                        i=0;
+                        txtSl.setText(i+"");
+                        nameMon.removeAll(nameMon);
+                        trunggian.luuMang("MangMonAn",nameMon, getBaseContext());
                         Log.d("abc", "onNavigationItemSelected: am nhac");
                         break;
                     case R.id.lienHeCuocGoi:
-                        Log.d("abc", "onNavigationItemSelected: lien he cuoc goi");
                         makePhoneCall();
                         break;
                 }
@@ -94,16 +104,18 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
                 if(nameMon!=null) {
                     trunggian.luuMang("MangMonAn", nameMon, getBaseContext());
                 }else{
-                    nameMon=null;
+                    nameMon=new ArrayList<>();
                     trunggian.luuMang("MangMonAn",nameMon, getBaseContext());
 
                 }
+                check(getCurrentFocus());
                 getSupportFragmentManager().beginTransaction().addToBackStack("giohang").replace(R.id.content_frame, giohang_fragment.newInstance()).commit();
             }
         });
         getSupportFragmentManager().beginTransaction().addToBackStack("chude").replace(R.id.content_frame, chude_fragment.newInstance()).commit();
 
     }
+
 
     public static void tangsl(String sl) {
         txtSl.setText(sl + "");
@@ -197,12 +209,13 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
             switch (menuItem.getItemId()) {
                 case R.id.trangchu:
                     getSupportFragmentManager().beginTransaction().addToBackStack("chude").replace(R.id.content_frame, chude_fragment.newInstance()).commit();
+                    check(getCurrentFocus());
                     return true;
                 case R.id.giohang_bottom_main:
                     if(nameMon!=null) {
                         trunggian.luuMang("MangMonAn", nameMon, getBaseContext());
                     }else{
-                        nameMon=null;
+                        nameMon=new ArrayList<>();
                         trunggian.luuMang("MangMonAn",nameMon, getBaseContext());
                     }
                     getSupportFragmentManager().beginTransaction().addToBackStack("giohang").replace(R.id.content_frame, giohang_fragment.newInstance()).commit();
@@ -213,4 +226,13 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
             }
 
     };
+    public static void check(View view) {
+        boolean ret = ConnectionReceiver.isConnected();
+        String msg="";
+        if (ret != true) {
+            msg = "Thiết bị chưa kết nối internet";
+            Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

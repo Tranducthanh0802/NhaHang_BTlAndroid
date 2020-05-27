@@ -5,8 +5,8 @@
     android:layout_height="wrap_content">
     <ImageView
         android:scaleType="fitXY"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
         android:id="@+id/anh_ds_thanhtoan_adap"
         />
     <TextView
@@ -14,19 +14,22 @@
         android:layout_height="wrap_content"
         android:text="Ten san pham"
         android:layout_toRightOf="@id/anh_ds_thanhtoan_adap"
-        android:textSize="16sp"
+        android:textSize="@dimen/_13sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
         android:id="@+id/txtTen_ds_thanhtoan_adap"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nha cung cap"
+        android:layout_marginLeft="@dimen/_5sdp"
         android:layout_toRightOf="@id/anh_ds_thanhtoan_adap"
         android:layout_below="@id/txtTen_ds_thanhtoan_adap"
         android:id="@+id/txtNCC_ds_thanhtoan_adap"
-        android:textSize="16sp"
+        android:textSize="@dimen/_11sdp"
         />
     <TextView
+        android:layout_marginLeft="@dimen/_5sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtNCC_ds_thanhtoan_adap"
@@ -40,7 +43,7 @@
         android:text="gia tien"
         android:layout_alignParentRight="true"
         android:id="@+id/txtTien_ds_thanhtoan_adap"
-        android:textSize="16sp"
+        android:textSize="@dimen/_13sdp"
         />
 
 </RelativeLayout>

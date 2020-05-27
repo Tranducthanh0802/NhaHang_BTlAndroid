@@ -27,7 +27,10 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
     Context context;
     sl_ion ion;
     onLongclick click;
+    public interface onLongclick {
+        void ItemLongClicked(View v, int position);
 
+    }
     public void setClick(onLongclick click) {
         this.click = click;
     }
@@ -88,8 +91,9 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                click.ItemLongClicked(view,position);
-                return true;
+                if(click !=null) {
+                    click.ItemLongClicked(view, position);
+                }return true;
             }
         });
 

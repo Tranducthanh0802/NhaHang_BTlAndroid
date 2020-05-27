@@ -5,55 +5,61 @@
     android:layout_height="wrap_content">
     <ImageView
         android:scaleType="fitXY"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         android:id="@+id/anh_ds_ofchude_adap"
         />
     <TextView
-        android:layout_marginLeft="10dp"
-        android:paddingTop="19dp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:paddingTop="@dimen/_3sdp"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ten san pham"
         android:layout_toRightOf="@id/anh_ds_ofchude_adap"
-        android:textSize="16sp"
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/txtTen_ds_ofchude_adap"
         />
     <TextView
-        android:layout_marginLeft="10dp"
-        android:paddingTop="10dp"
+        android:layout_marginLeft="@dimen/_6sdp"
+        android:paddingTop="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nha cung cap"
         android:layout_toRightOf="@id/anh_ds_ofchude_adap"
         android:layout_below="@id/txtTen_ds_ofchude_adap"
         android:id="@+id/txtNCC_ds_ofchude_adap"
-        android:textSize="16sp"
+        android:textSize="@dimen/_8sdp"
         />
+
     <TextView
-        android:layout_marginLeft="10dp"
-        android:paddingTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="gia tien"
-        android:layout_toRightOf="@id/anh_ds_ofchude_adap"
-        android:layout_below="@id/txtNCC_ds_ofchude_adap"
         android:id="@+id/txtTien_ds_ofchude_adap"
-        android:textSize="16sp"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_toRightOf="@id/anh_ds_ofchude_adap"
+        android:paddingTop="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:text="gia tien"
+        android:textColor="@color/colorName"
+        android:layout_below="@id/txtNCC_ds_ofchude_adap"
+        android:textSize="@dimen/_12sdp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtTien_ds_ofchude_adap"
+
         android:layout_toRightOf="@id/anh_ds_ofchude_adap"
-        android:textSize="16sp"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
         android:id="@+id/sluongNguoiMua"
+        android:layout_alignBottom="@id/anh_ds_ofchude_adap"
+        android:layout_marginBottom="@dimen/_5sdp"
         />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mua"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:id="@+id/btnMua"
 
        android:layout_alignParentRight="true"

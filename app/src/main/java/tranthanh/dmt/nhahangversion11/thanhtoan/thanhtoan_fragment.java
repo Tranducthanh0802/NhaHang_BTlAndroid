@@ -3,7 +3,6 @@ package tranthanh.dmt.nhahangversion11.thanhtoan;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ import java.util.Date;
 import tranthanh.dmt.nhahangversion11.MainActivity;
 import tranthanh.dmt.nhahangversion11.R;
 import tranthanh.dmt.nhahangversion11.SQl_helper;
-import tranthanh.dmt.nhahangversion11.Trangchu.chude_fragment;
+import tranthanh.dmt.nhahangversion11.Trangchu.ds_sp_Hot.chude_fragment;
 import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 import tranthanh.dmt.nhahangversion11.trunggian;
 
@@ -101,14 +100,23 @@ public class thanhtoan_fragment extends Fragment {
                     }
                     HienAlert();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, chude_fragment.newInstance()).commit();
+                    xoagiohang();
                 } else {
                     Toast.makeText(getActivity(), "Hay chon hinh thuc thanh toan", Toast.LENGTH_SHORT).show();
-
+                    MainActivity.check(getView());
                 }
+
             }
         });
 
         return view;
+    }
+    public void xoagiohang(){
+        MainActivity.nameMon.removeAll( MainActivity.nameMon);
+        trunggian.luuMang("MangMonAn", MainActivity.nameMon, getContext());
+        MainActivity.i=0;
+        MainActivity.tangsl(MainActivity.i+"");
+
     }
 
     private void tinhtongtien() {

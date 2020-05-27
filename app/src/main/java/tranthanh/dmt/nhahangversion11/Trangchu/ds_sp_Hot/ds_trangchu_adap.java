@@ -1,4 +1,4 @@
-package tranthanh.dmt.nhahangversion11.chude;
+package tranthanh.dmt.nhahangversion11.Trangchu.ds_sp_Hot;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,38 +17,40 @@ import java.util.ArrayList;
 
 import tranthanh.dmt.nhahangversion11.R;
 import tranthanh.dmt.nhahangversion11.chuyendulieu;
+import tranthanh.dmt.nhahangversion11.giohang.dong_sp_giohang;
 
-public class hanghoa_ofchude_adapter extends RecyclerView.Adapter<hanghoa_ofchude_adapter.ViewHolder> {
+public class ds_trangchu_adap extends RecyclerView.Adapter<ds_trangchu_adap.ViewHolder> {
     Context context;
-    ArrayList<dong_hoahoa_ofchude> list;
+    ArrayList<dong_sp_giohang> list;
     chuyendulieu ion;
 
-    public hanghoa_ofchude_adapter(Context context, ArrayList<dong_hoahoa_ofchude> list) {
-        this.context = context;
-        this.list = list;
-    }
-
-    public hanghoa_ofchude_adapter(Context context, ArrayList<dong_hoahoa_ofchude> list, chuyendulieu ion) {
+    public ds_trangchu_adap(Context context, ArrayList<dong_sp_giohang> list, chuyendulieu ion) {
         this.context = context;
         this.list = list;
         this.ion = ion;
+    }
+
+    public ds_trangchu_adap(Context context, ArrayList<dong_sp_giohang> list) {
+        this.context = context;
+        this.list = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.dong_hanghoaofchude,parent,false);
-        hanghoa_ofchude_adapter.ViewHolder viewHolder=new hanghoa_ofchude_adapter.ViewHolder(view);
+        ds_trangchu_adap.ViewHolder viewHolder=new ds_trangchu_adap.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        dong_hoahoa_ofchude ds=list.get(position);
+        dong_sp_giohang ds=list.get(position);
         Picasso.with(context).load(ds.getAnh().toString()).into(holder.img);
         holder.txtName.setText(ds.getName().toString()+"");
-        holder.txtNCC.setText(ds.getNCc().toString()+"");
-        holder.txtMoney.setText("Gia:"+ds.getTien().toString()+" VND");
+        holder.txtNCC.setText(ds.getNcc().toString()+"");
+        holder.txtMoney.setText("Gia tien:"+ds.getTien().toString()+" VND");
+        holder.txtLuotxem.setText("So luot mua:"+ds.getLuotxem() +"");
         holder.btnmua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +66,7 @@ public class hanghoa_ofchude_adapter extends RecyclerView.Adapter<hanghoa_ofchud
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
-        TextView txtName,txtNCC,txtMoney;
+        TextView txtName,txtNCC,txtMoney,txtLuotxem;
         Button btnmua;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +75,7 @@ public class hanghoa_ofchude_adapter extends RecyclerView.Adapter<hanghoa_ofchud
             txtName=itemView.findViewById(R.id.txtTen_ds_ofchude_adap);
             txtNCC=itemView.findViewById(R.id.txtNCC_ds_ofchude_adap);
             btnmua=itemView.findViewById(R.id.btnMua);
+            txtLuotxem=itemView.findViewById(R.id.sluongNguoiMua);
         }
     }
 }

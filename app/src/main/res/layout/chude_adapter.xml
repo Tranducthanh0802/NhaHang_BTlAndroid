@@ -7,12 +7,12 @@
 
     <ImageView
         android:id="@+id/anh_chude_trangchu_adap"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="@dimen/_25sdp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:scaleType="fitXY" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_below="@id/anh_chude_trangchu_adap"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/_5sdp"
         android:text="ten chu de"
         android:textColor="@color/colorText"
         android:id="@+id/txtTen_ds_trangchu_adap"

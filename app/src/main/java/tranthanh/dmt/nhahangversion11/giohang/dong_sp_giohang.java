@@ -1,5 +1,9 @@
 package tranthanh.dmt.nhahangversion11.giohang;
 
+import android.content.Context;
+
+import tranthanh.dmt.nhahangversion11.trunggian;
+
 public class dong_sp_giohang implements Comparable<dong_sp_giohang> {
     String anh;
     String Ncc;
@@ -7,6 +11,7 @@ public class dong_sp_giohang implements Comparable<dong_sp_giohang> {
     String tien;
     int sl=1;
     int luotxem=0;
+    Context context;
 
     public int getLuotxem() {
         return luotxem;
@@ -82,6 +87,7 @@ public class dong_sp_giohang implements Comparable<dong_sp_giohang> {
 
     @Override
     public int compareTo(dong_sp_giohang dong_sp_giohang) {
+
         if (luotxem == dong_sp_giohang.luotxem)
             return 0;
         else if (luotxem > dong_sp_giohang.luotxem)
