@@ -1,6 +1,7 @@
 package tranthanh.dmt.nhahangversion11.giohang;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +25,7 @@ import tranthanh.dmt.nhahangversion11.thanhtoan.dong_sp_thanhtoan;
 
 public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHolder> {
     List<dong_sp_giohang> listsp;
-    ArrayList<dong_sp_thanhtoan> listspTT;
+    List<dong_sp_thanhtoan> listspTT;
     Context context;
     sl_ion ion;
     onLongclick click;
@@ -36,13 +38,13 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
     }
 
     public ds_giohang_adap(List<dong_sp_giohang> listsp, Context context) {
-        this.listsp = listsp;
+        this.listsp =  listsp;
         this.context = context;
 
     }
 
     public ds_giohang_adap(List<dong_sp_giohang> listsp, Context context, sl_ion ion) {
-        this.listsp = listsp;
+        this.listsp =  listsp;
         this.context = context;
         this.ion = ion;
     }
@@ -69,6 +71,7 @@ public class ds_giohang_adap extends RecyclerView.Adapter<ds_giohang_adap.ViewHo
                 int a= Integer.parseInt(holder.txtSl.getText().toString())+1;
                 listsp.get(position).setSl(a);
                 holder.txtSl.setText(a+"");
+                Log.d("cong", "onClick: "+listsp.size());
             }
         });
         holder.btnTru.setOnClickListener(new View.OnClickListener() {

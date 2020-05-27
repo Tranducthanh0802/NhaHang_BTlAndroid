@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tranthanh.dmt.nhahangversion11.MainActivity;
 import tranthanh.dmt.nhahangversion11.R;
@@ -41,8 +42,8 @@ public class giohang_fragment extends Fragment implements sl_ion {
     TextView txtSotien;
     Button btnThanhtoan;
     ds_giohang_adap adapter;
-    ArrayList<dong_sp_giohang> list;
-    ArrayList<String> listten;
+    List<dong_sp_giohang> list;
+    List<String> listten;
     int vitri=0;
     int tong=0;
     public static giohang_fragment newInstance() {
@@ -64,7 +65,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
         btnThanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                trunggian.luuMangGioHang("ListThanhToan",list,getActivity());
+                trunggian.luuMangGioHang("ListThanhToan", (ArrayList<dong_sp_giohang>) list,getActivity());
                 getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("thanhtoan").replace(R.id.content_frame, thanhtoan_fragment.newInstance()).commit();
                 MainActivity.check(getView());
             }
@@ -76,7 +77,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
     }
     void hamchude(View view){
         list =new ArrayList<>();
-        readJson(list,view,trunggian.linkHangHoa,this);
+        readJson((ArrayList<dong_sp_giohang>) list,view,trunggian.linkHangHoa,this);
 
     }
     public void readJson(final ArrayList<dong_sp_giohang> list, final View view, String url, final sl_ion ion){

@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:background="?attr/colorPrimary"
             />
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/toolbar"
@@ -31,7 +31,7 @@
             android:id="@+id/AutoCom"
             android:layout_marginTop="@dimen/_8sdp"
             android:completionHint="Tim kiem mon an"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
+
             />
         <RelativeLayout
             android:layout_alignParentRight="true"

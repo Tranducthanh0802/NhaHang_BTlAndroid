@@ -95,7 +95,7 @@ public class chude_fragment extends Fragment implements interface_Sukien,chuyend
     }
     void khoidongSpinner(){
         ArrayList<String> lsst=new ArrayList<>();
-        lsst.add("Sap xep theo luot xem tang dan");
+        lsst.add("Sap xep theo luot Mua tang dan");
         lsst.add("Sap xep theo gia tien tang dan");
         lsst.add("Sap xep theo gia tien giam dan");
         ArrayAdapter<String> adapter12=new ArrayAdapter<String>(
@@ -109,7 +109,7 @@ public class chude_fragment extends Fragment implements interface_Sukien,chuyend
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.RED);
+                //((TextView) adapterView.getChildAt(0)).setTextColor(Color.RED);
                 switch (i){
                     case 0:
                         Collections.sort(list1);
@@ -277,8 +277,7 @@ public class chude_fragment extends Fragment implements interface_Sukien,chuyend
                 while (!cursor.isAfterLast()) {
                     b = cursor.getString(cursor.getColumnIndex(SQl_helper.getNAME()));
                     c = Integer.parseInt(cursor.getString(cursor.getColumnIndex("sl")));
-                    Log.d("abcde", "laylist: " + b + c);
-                    lisst.add(new dong_awc(b, c));
+                   lisst.add(new dong_awc(b, c));
                     cursor.moveToNext();
                 }
             }

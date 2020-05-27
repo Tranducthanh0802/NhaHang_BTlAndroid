@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
         setTitle("");
         nameMon=new ArrayList<>();
         hamchude1();
-        edtAuto=findViewById(R.id.AutoCom);
+        edtAuto=(AutoCompleteTextView) findViewById(R.id.AutoCom);
         img = findViewById(R.id.imgShop_Main);
         txtSl = findViewById(R.id.slshop_Main);
 
@@ -88,8 +88,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
                         txtSl.setText(i+"");
                         nameMon.removeAll(nameMon);
                         trunggian.luuMang("MangMonAn",nameMon, getBaseContext());
-                        Log.d("abc", "onNavigationItemSelected: am nhac");
-                        break;
+                       break;
                     case R.id.lienHeCuocGoi:
                         makePhoneCall();
                         break;
@@ -169,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
                     }
                 }
                 adapter1 =new arrayAdapter_autoText(getBaseContext(),lst,ion);
-
                 edtAuto.setAdapter(adapter1);
 
             }
