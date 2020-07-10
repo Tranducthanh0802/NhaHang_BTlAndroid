@@ -87,9 +87,10 @@ public class arrayAdapter_autoText extends ArrayAdapter<dong_sp_giohang> {
             if(charSequence == null || charSequence.length()==0){
                 suggestion.addAll(list);
             }else{
-                String filterPattern = charSequence.toString().toLowerCase().trim();
+                int filterPattern = Integer.parseInt(charSequence.toString().trim());
                 for(int i=0;i<list.size();i++){
-                    if(list.get(i).getName().toLowerCase().contains(filterPattern)){
+                    Log.d("abc", "performFiltering: "+list.get(i).getTien().toString());
+                    if(Integer.parseInt(list.get(i).getTien().toString())<=filterPattern){
                         suggestion.add(list.get(i));
                         Log.d("abcd", filterPattern+" "+list.get(i).getName()+i);
 

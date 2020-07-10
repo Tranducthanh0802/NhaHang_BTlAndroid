@@ -41,7 +41,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
     RecyclerView recyclerView;
     TextView txtSotien;
     Button btnThanhtoan;
-    ds_giohang_adap adapter;
+   public static ds_giohang_adap adapter;
     List<dong_sp_giohang> list;
     List<String> listten;
     int vitri = 0;
@@ -113,6 +113,7 @@ public class giohang_fragment extends Fragment implements sl_ion {
                         }
                     }
                     adapter = new ds_giohang_adap(list, view.getContext(), ion);
+
                     adapter.setClick(new ds_giohang_adap.onLongclick() {
                         @Override
                         public void ItemLongClicked(View v, int position) {
@@ -188,4 +189,6 @@ public class giohang_fragment extends Fragment implements sl_ion {
         MainActivity.tangsl(MainActivity.i + "");
 
     }
+
+
 }

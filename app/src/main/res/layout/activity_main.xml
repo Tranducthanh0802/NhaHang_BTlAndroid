@@ -20,18 +20,17 @@
             android:id="@+id/toolbar"
             android:background="?attr/colorPrimary"
             />
-        <AutoCompleteTextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/toolbar"
             android:layout_toLeftOf="@id/aaaa"
             android:layout_above="@id/content_frame"
-            android:completionThreshold="1"
             android:background="#fcf8f3"
             android:id="@+id/AutoCom"
             android:layout_marginTop="@dimen/_8sdp"
-            android:completionHint="Tim kiem mon an"
-
+            android:hint="Tim kiem"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
             />
         <RelativeLayout
             android:layout_alignParentRight="true"

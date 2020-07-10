@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
     ImageView img;
     ArrayList<dong_sp_giohang> list1;
     arrayAdapter_autoText adapter1;
-    AutoCompleteTextView edtAuto;
+    public static EditText edtAuto;
     Spinner spinner;
     public static ArrayList<String> nameMon;
     public static int  i=0;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
         setTitle("");
         nameMon=new ArrayList<>();
         hamchude1();
-        edtAuto=(AutoCompleteTextView) findViewById(R.id.AutoCom);
+        edtAuto= findViewById(R.id.AutoCom);
         img = findViewById(R.id.imgShop_Main);
         txtSl = findViewById(R.id.slshop_Main);
 
@@ -84,11 +85,16 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.deleteDraw:
+                        if(i==0){
+                            Toast.makeText(getApplicationContext(),"Không sản phẩm nào !",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(),"Xóa thành công !",Toast.LENGTH_SHORT).show();
+                        }
                         i=0;
                         txtSl.setText(i+"");
                         nameMon.removeAll(nameMon);
                         trunggian.luuMang("MangMonAn",nameMon, getBaseContext());
-                       break;
+                        break;
                     case R.id.lienHeCuocGoi:
                         makePhoneCall();
                         break;
@@ -168,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements  chuyendulieu{
                     }
                 }
                 adapter1 =new arrayAdapter_autoText(getBaseContext(),lst,ion);
-                edtAuto.setAdapter(adapter1);
+
 
             }
         }, new Response.ErrorListener() {

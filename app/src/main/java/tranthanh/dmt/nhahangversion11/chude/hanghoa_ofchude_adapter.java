@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,11 +49,13 @@ public class hanghoa_ofchude_adapter extends RecyclerView.Adapter<hanghoa_ofchud
         Picasso.with(context).load(ds.getAnh().toString()).into(holder.img);
         holder.txtName.setText(ds.getName().toString()+"");
         holder.txtNCC.setText(ds.getNCc().toString()+"");
-        holder.txtMoney.setText("Gia:"+ds.getTien().toString()+" VND");
+        holder.txtMoney.setText(ds.getTien().toString()+" VND");
         holder.btnmua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ion.sendata(holder.txtName.getText().toString());
+                Toast.makeText(context,"Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
